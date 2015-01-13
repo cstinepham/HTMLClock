@@ -1,0 +1,14 @@
+body {
+	font-family: "Arial";
+	background-color: #66ffcc;
+	color: #585858;
+	text-align: center;
+}
+p {
+	font-size: 180px;
+	
+}
+.clockText{
+	font-weight: bold;
+}
+
