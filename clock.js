@@ -15,6 +15,8 @@ function getTime() {
 
     var clockDivElement = document.getElementById('clock');
     clockDivElement.innerHTML = h+":"+m+":"+s;
+    
+
     setTimeout(function(){getTime()}, 1000);
 }
 
