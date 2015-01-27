@@ -5,10 +5,12 @@ body {
 	text-align: center;
 }
 p {
-	font-size: 180px;
+	font-size: 18px;
 	
 }
-.clockText{
+#clock{
 	font-weight: bold;
+	font-size: 180px;
+
 }
 
