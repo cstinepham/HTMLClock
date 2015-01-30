@@ -1,7 +1,6 @@
 body {
 	font-family: "Arial";
 	background-color: #66ffcc;
-	color: #585858;
 	text-align: center;
 }
 p {
@@ -11,6 +10,8 @@ p {
 #clock{
 	font-weight: bold;
 	font-size: 180px;
+	color: #585858;
+
 
 }
 .cold {
