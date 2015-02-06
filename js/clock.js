@@ -50,6 +50,7 @@ function getTemp() {
          });
 }
 
+
 function showAlarmPopup() {
     $("#mask").removeClass("hide");
     $("#popup").removeClass("hide");
@@ -61,11 +62,10 @@ function hideAlarmPopup() {
 }
 
 function insertAlarm(hours, mins, ampm, alarmName) {
-    $("<div>").addClass("flexable");
-    $("div.flexable").append("<div class="name"></div>").html(alarmName);
-    $("div.flexable").append("<div class="time"></div>").html(hours+":"+mins+"ampm");
-
-    $("#alarms").append("<div class="flexable"</div>") ;                    
+    var div = $("<div>").addClass("flexable"); 
+    div.append($("<div>").addClass("name").html(alarmName));
+    div.append($("<div>").addClass("time").html(hours + ":" + mins + " " + ampm));
+    $("#alarms").append(div) ;                    
 
 }
 
