@@ -15,7 +15,7 @@ function getTime() {
     clockDivElement = document.getElementById("clock");
     clockDivElement.innerHTML = h+":"+m+":"+s;
     
-    setTimeout(function(){getTime()}, 1000);
+    setTimeout(function(){getTime();}, 1000);
 }
 
 
@@ -61,11 +61,14 @@ function hideAlarmPopup() {
     $("#popup").addClass("hide");
 }
 
-function insertAlarm(time, alarmName) {
+function insertAlarm(time, alarmName, alarmObject) {
     var div = $("<div>").addClass("flexable"); 
     div.append($("<div>").addClass("name").html(alarmName));
     div.append($("<div>").addClass("time").html(time));
-    $("#alarms").append(div) ;                    
+
+    var removeButton = $("<input>").attr("type", "button").val("Remove");
+    div.append(removeButton);
+    $("#alarms").append(div);
 
 }
 
@@ -83,7 +86,7 @@ function addAlarm() {
 
     alarmObject.save({"time":time,"alarmName":alarmName}, {
         success: function(object) {
-            insertAlarm(time, alarmName);
+            insertAlarm(time, alarmName, this);
             hideAlarmPopup();
 
         }
@@ -97,7 +100,7 @@ function getAllAlarms() {
     query.find({
         success: function(results) {
             for (var i=0; i<results.length; i++) {
-                insertAlarm(results[i].get("time"), results[i].get("alarmName"));
+                insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i]);
             }
         }
     });
