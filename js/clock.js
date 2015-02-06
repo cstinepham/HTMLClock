@@ -61,12 +61,19 @@ function hideAlarmPopup() {
     $("#popup").addClass("hide");
 }
 
-function insertAlarm(time, alarmName, alarmObject) {
+function insertAlarm(time, alarmName, alarm) {
     var div = $("<div>").addClass("flexable"); 
     div.append($("<div>").addClass("name").html(alarmName));
     div.append($("<div>").addClass("time").html(time));
 
     var removeButton = $("<input>").attr("type", "button").val("Remove");
+    removeButton.click(function () {
+        alarm.destroy({
+            success: function() {
+                div.remove();
+            }
+        });
+     });    
     div.append(removeButton);
     $("#alarms").append(div);
 
@@ -86,7 +93,7 @@ function addAlarm() {
 
     alarmObject.save({"time":time,"alarmName":alarmName}, {
         success: function(object) {
-            insertAlarm(time, alarmName, this);
+            insertAlarm(time, alarmName);
             hideAlarmPopup();
 
         }
