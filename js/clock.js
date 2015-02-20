@@ -1,4 +1,4 @@
-var userId;
+var userId ="";
 
 function getTime() {
     var d = new Date();
@@ -136,9 +136,6 @@ function signinCallback(authResult) {
 
     getAllAlarms(userId);
 
-
-
-
     // Update the app to reflect a signed in user
     // Hide the sign-in button now that the user is authorized, for example:
     document.getElementById('signinButton').setAttribute('style', 'display: none');
@@ -159,5 +156,4 @@ function signinCallback(authResult) {
 window.onload = function() {
     getTime();
     getTemp();
-    getAllAlarms();
  };
