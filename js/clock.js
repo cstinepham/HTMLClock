@@ -81,7 +81,7 @@ function insertAlarm(time, alarmName, alarm) {
 
 
 
-function addAlarm() {
+function addAlarm(userId) {
     var hours = $("#hours option:selected").text();
     var mins = $("#mins option:selected").text();
     var ampm = $("#ampm option:selected").text();
@@ -90,6 +90,9 @@ function addAlarm() {
 
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
+
+    
+    
 
     alarmObject.save({"time":time,"alarmName":alarmName}, {
         success: function(object) {
@@ -103,6 +106,7 @@ function addAlarm() {
 function getAllAlarms() {
     Parse.initialize("G8OrVGtahBG8Z1g2OoZMHjjAYwS1GbzBe3BDcTLE", "rzPfiIOYu6pHmCYqfZkLK9WxLxDypFT0iT80XsPf");
     var AlarmObject = Parse.Object.extend("Alarm");
+
     var query = new Parse.Query(AlarmObject);
     query.find({
         success: function(results) {
@@ -111,6 +115,21 @@ function getAllAlarms() {
             }
         }
     });
+}
+
+function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+    // Update the app to reflect a signed in user
+    // Hide the sign-in button now that the user is authorized, for example:
+    document.getElementById('signinButton').setAttribute('style', 'display: none');
+  } else {
+    // Update the app to reflect a signed out user
+    // Possible error values:
+    //   "user_signed_out" - User is signed-out
+    //   "access_denied" - User denied access to your app
+    //   "immediate_failed" - Could not automatically log in the user
+    console.log('Sign-in state: ' + authResult['error']);
+  }
 }
 
 
