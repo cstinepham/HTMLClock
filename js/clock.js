@@ -110,12 +110,11 @@ function getAllAlarms(userId) {
     var AlarmObject = Parse.Object.extend("Alarm");
 
     var query = new Parse.Query(AlarmObject);
+    query.equalTo("userId", userId);
     query.find({
         success: function(results) {
-            for (var i=0; i<results.length; i++) {
-                if (results[i].get("userId") == userId) {
-                    insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i]);
-                }
+            for (var i=0; i<results.length; i++) {    
+                insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i]);
             }
         }
     });
@@ -130,7 +129,7 @@ function signinCallback(authResult) {
        'userId': 'me',
      });
      request.execute(function(resp) {
-       userId = resp[0].id;
+       userId = resp.id;
 
      });
     });
