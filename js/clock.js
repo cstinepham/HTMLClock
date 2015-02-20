@@ -1,3 +1,4 @@
+var userId;
 
 function getTime() {
     var d = new Date();
@@ -82,7 +83,7 @@ function insertAlarm(time, alarmName, alarm) {
 
 
 
-function addAlarm(userId) {
+function addAlarm() {
     var hours = $("#hours option:selected").text();
     var mins = $("#mins option:selected").text();
     var ampm = $("#ampm option:selected").text();
@@ -95,7 +96,7 @@ function addAlarm(userId) {
 
 
 
-    alarmObject.save({"time":time,"alarmName":alarmName}, {
+    alarmObject.save({"time":time,"alarmName":alarmName, "userId" : userId}, {
         success: function(object) {
             insertAlarm(time, alarmName);
             hideAlarmPopup();
@@ -104,7 +105,7 @@ function addAlarm(userId) {
     });
 }
 
-function getAllAlarms() {
+function getAllAlarms(userId) {
     Parse.initialize("G8OrVGtahBG8Z1g2OoZMHjjAYwS1GbzBe3BDcTLE", "rzPfiIOYu6pHmCYqfZkLK9WxLxDypFT0iT80XsPf");
     var AlarmObject = Parse.Object.extend("Alarm");
 
@@ -112,13 +113,14 @@ function getAllAlarms() {
     query.find({
         success: function(results) {
             for (var i=0; i<results.length; i++) {
-                insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i]);
+                if (results[i].get("userId") == userId) {
+                    insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i]);
+                }
             }
         }
     });
 }
 
-var userId;
 
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
@@ -133,7 +135,7 @@ function signinCallback(authResult) {
      });
     });
 
-    getAllAlarms();
+    getAllAlarms(userId);
 
 
 
