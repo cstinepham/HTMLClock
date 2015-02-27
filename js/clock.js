@@ -73,6 +73,8 @@ function insertAlarm(time, alarmName, alarm) {
         alarm.destroy({
             success: function() {
                 div.remove();
+                ga('send', 'event', 'Alarm', 'Delete');
+
             }
         });
      });    
@@ -95,11 +97,12 @@ function addAlarm() {
 
 
 
-
     alarmObject.save({"time":time,"alarmName":alarmName, "userId" : userId}, {
         success: function(object) {
             insertAlarm(time, alarmName);
             hideAlarmPopup();
+            ga('send', 'event', 'Alarm', 'Add');
+
 
         }
     });
