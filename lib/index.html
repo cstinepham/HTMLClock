@@ -10,7 +10,7 @@
 		<script src="redirect.js" type="text/javascript"></script>
 
 		<script type = "text/javascript">
-		function callback(data) {
+		function callbackFn(data) {
 			$.ajax({
 				url: "https://api.imgur.com/3/account/me/",
 				type: "GET",
@@ -27,7 +27,7 @@
 			});
 
 		}
-		init(client_id:"e3ce56f375dd9e2", type:"token", callback=)
+		init({client_id:"e3ce56f375dd9e2", type:"token", callback:callbackFn});
 		</script>
 
 		<button onclick ="login()"> Hi </button>
